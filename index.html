@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crop Yield Prediction</title>
+    <style>
+         body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        h1, h2 {
+            text-align: center;
+            color: #333333;
+        }
+
+        .card {
+            background-color: #333;
+            color: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        .card
+        .form-label {
+            font-weight: bold;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .btn {
+            background-color: #dc3545;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .btn:hover {
+            background-color: #c82333;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .mt-3 {
+            margin-top: 10px;
+        }
+
+        .mt-4 {
+            margin-top: 20px;
+        }
+
+        .text-info {
+            color: #17a2b8;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Crop Yield Prediction Per Country</h1>
+        <div class="card">
+            <h2>Input All Features Here</h2>
+            <form id="predictionForm" action="/predict" method="post">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="Year" class="form-label">Year</label>
+                        <input type="number" class="form-control" id="Year" name="Year" value="2013" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="average_rain_fall_mm_per_year" class="form-label">Average Rainfall (mm/year)</label>
+                        <input type="number" class="form-control" id="average_rain_fall_mm_per_year" name="average_rain_fall_mm_per_year" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="pesticides_tonnes" class="form-label">Pesticides (tonnes)</label>
+                        <input type="number" class="form-control" id="pesticides_tonnes" name="pesticides_tonnes" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="avg_temp" class="form-label">Average Temperature (°C)</label>
+                        <input type="number" class="form-control" id="avg_temp" name="avg_temp" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="Area" class="form-label">Area</label>
+                        <input type="text" class="form-control" id="Area" name="Area" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="Item" class="form-label">Item</label>
+                        <input type="text" class="form-control" id="Item" name="Item" required>
+                    </div>
+                    <div class="col-12">
+                        <button type="submit" class="btn mt-3">Predict</button>
+                    </div>
+                </div>
+            </form>
+            <h2 style="color: white;">Prediction Result</h2>
+            {% if prediction %}
+            <div id="predictionResult" class="text-center mt-4">
+                <h2>Predicted Yield:</h2>
+                <h3 class="text-info">{{ prediction }}</h3>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
